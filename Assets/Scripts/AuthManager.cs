@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +45,12 @@ public class AuthManager : MonoBehaviour
         {
             AuthenticationService.Instance.SignOut();
         });
+        
+        // 플레이어 이름 저장 버튼 이벤트 연결
+        _playerNameSaveButton.onClick.AddListener(async () =>
+        {
+            await SetPlayerName(_playerNameIf.text);
+        });
     }
     
     // 인증 이벤트 연결
@@ -61,5 +69,23 @@ public class AuthManager : MonoBehaviour
         
         // 세션 아웃
         AuthenticationService.Instance.Expired += () => Debug.Log("세션 타임 아웃");
+    }
+    
+    // 플레이어 이름 저장 
+    private async Task SetPlayerName(string playerName)
+    {
+        try
+        {
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+            Debug.Log($"{playerName} 변경 완료");
+            /* 사용자 이름
+             * 50자 허용, 공백 불가, 4자리 해시값  Zack => Zack#1234
+             */
+            Debug.Log(AuthenticationService.Instance.PlayerName);
+        }
+        catch (AuthenticationException e)   
+        {
+            Debug.LogError(e.Message);
+        }
     }
 }
