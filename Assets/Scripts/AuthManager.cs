@@ -22,6 +22,7 @@ public class AuthManager : MonoBehaviour
             {
                 // 익명 로그인 요청
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log("익명 사용자 로그인 성공");
             }
             catch (AuthenticationException e)
             {
