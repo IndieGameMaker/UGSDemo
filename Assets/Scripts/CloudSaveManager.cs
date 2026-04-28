@@ -41,22 +41,22 @@ public class CloudSaveManager : MonoBehaviour
         var data = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string>{"player_name", "level", "xp", "gold"});
         if (data.TryGetValue("player_name", out var playerName))
         {
-            Debug.Log("PlayerName: " + playerName);
+            Debug.Log("PlayerName: " + playerName.Value.GetAs<string>());
         }
 
         if (data.TryGetValue("level", out var level))
         {
-            Debug.Log("Level: " + level);
+            Debug.Log("Level: " + level.Value.GetAs<int>());
         }
         
         if (data.TryGetValue("xp", out var xp))
         {
-            Debug.Log("XP: " + xp);
+            Debug.Log("XP: " + xp.Value.GetAs<int>());
         }
 
         if (data.TryGetValue("gold", out var gold))
         {
-            Debug.Log("Gold: " + gold);
+            Debug.Log("Gold: " + gold.Value.GetAs<int>());
         }
             
     }
