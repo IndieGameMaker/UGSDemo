@@ -15,6 +15,9 @@ public class AuthManager : MonoBehaviour
         // UGS 초기화
         await UnityServices.InitializeAsync();
         
+        // 이벤트 연결
+        EventBinding();
+        
         // 버튼 이벤트 연결
         _signInButton.onClick.AddListener(async () => 
         {
@@ -22,12 +25,30 @@ public class AuthManager : MonoBehaviour
             {
                 // 익명 로그인 요청
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
-                Debug.Log("익명 사용자 로그인 성공");
+                
             }
             catch (AuthenticationException e)
             {
                 Debug.LogError(e.Message);
             }
         });
+    }
+    
+    // 인증 이벤트 연결
+    private void EventBinding()
+    {
+        // 로그인
+        AuthenticationService.Instance.SignedIn += () =>
+        {
+            Debug.Log($"익명 사용자 로그인 성공 {AuthenticationService.Instance.PlayerId}");
+        };
+        // 로그 아웃
+        AuthenticationService.Instance.SignedOut += () =>
+        {
+            Debug.Log("로그 아웃");
+        };
+        
+        // 세션 아웃
+        AuthenticationService.Instance.Expired += () => Debug.Log("세션 타임 아웃");
     }
 }
