@@ -6,6 +6,7 @@ using Unity.Services.Core;
 public class AuthManager : MonoBehaviour
 {
     [SerializeField] private Button _signInButton;
+    [SerializeField] private Button _signOutButton;
 
     private async void Awake()
     {
@@ -18,7 +19,7 @@ public class AuthManager : MonoBehaviour
         // 이벤트 연결
         EventBinding();
         
-        // 버튼 이벤트 연결
+        // 로그인 버튼 이벤트 연결
         _signInButton.onClick.AddListener(async () => 
         {
             try
@@ -31,6 +32,12 @@ public class AuthManager : MonoBehaviour
             {
                 Debug.LogError(e.Message);
             }
+        });
+        
+        // 로그아웃 버튼 이벤트 연결
+        _signOutButton.onClick.AddListener(() =>
+        {
+            AuthenticationService.Instance.SignOut();
         });
     }
     
