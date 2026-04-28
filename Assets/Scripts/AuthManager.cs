@@ -57,6 +57,31 @@ public class AuthManager : MonoBehaviour
         });
 
         // AuthenticationService.Instance.GetPlayerNameAsync();
+        
+        // 회원가입 이벤트 연결
+        /*
+         * UserName : 대소문자 구별없음, 3 ~ 20자, [. - @] 사용가능
+         * Passwrod : 대소문자 구별, 8자 ~ 30자, 1 영문 대문자, 1 영문 소문자, 숫자 1, 특수문자 1
+         * Ab1234!!
+         */
+        _signUpButton.onClick.AddListener(async () =>
+        {
+            try
+            {
+                await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(_userNameIf.text,
+                    _passwordIf.text);
+                
+                Debug.Log("회원가입 성공");
+            }
+            catch (AuthenticationException e)
+            {
+                Debug.LogError(e.Message);
+            }
+            catch (RequestFailedException e)
+            {
+                Debug.LogError(e.Message);
+            }
+        });
     }
     
     // 인증 이벤트 연결
