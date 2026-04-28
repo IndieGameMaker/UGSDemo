@@ -120,4 +120,21 @@ public class AuthManager : MonoBehaviour
             Debug.LogError(e.Message);
         }
     }
+    
+    // Username & Password 로그인 요청
+    private async Task SignIn(string userName, string password)
+    {
+        try
+        {
+            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(userName, password);
+        }
+        catch (AuthenticationException e)
+        {
+            Debug.LogError(e.Message);
+        }
+        catch (RequestFailedException e)
+        {
+            Debug.LogError(e.Message);
+        }
+    }
 }
