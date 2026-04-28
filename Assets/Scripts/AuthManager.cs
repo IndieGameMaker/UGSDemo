@@ -13,6 +13,10 @@ public class AuthManager : MonoBehaviour
     [SerializeField] private Button _playerNameSaveButton;
 
     [SerializeField] private TMP_InputField _playerNameIf;
+    
+    [Header("UserName & Password")]
+    [SerializeField] private TMP_InputField _userNameIf, _passwordIf;
+    [SerializeField] private Button _signUpButton, _signInUsernameButton;
 
     private async void Awake()
     {
@@ -51,6 +55,8 @@ public class AuthManager : MonoBehaviour
         {
             await SetPlayerName(_playerNameIf.text);
         });
+
+        // AuthenticationService.Instance.GetPlayerNameAsync();
     }
     
     // 인증 이벤트 연결
