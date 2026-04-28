@@ -68,7 +68,8 @@ public class AuthManager : MonoBehaviour
         {
             try
             {
-                await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(_userNameIf.text,
+                // 회원가입 (SignUp...)
+                await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(_userNameIf.text,
                     _passwordIf.text);
                 
                 Debug.Log("회원가입 성공");
