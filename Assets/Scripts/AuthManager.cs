@@ -142,6 +142,7 @@ public class AuthManager : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(userName, password);
+            Debug.Log("로그인 성공");
         }
         catch (AuthenticationException e)
         {
