@@ -143,6 +143,11 @@ public class AuthManager : MonoBehaviour
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(userName, password);
             Debug.Log("로그인 성공");
+            
+            // 익명 사용자를 Username Password로 전환
+            // await AuthenticationService.Instance.AddUsernamePasswordAsync(userName, password);
+            // 비밀번호 업데이트
+            // await AuthenticationService.Instance.UpdatePasswordAsync(userName, password);
         }
         catch (AuthenticationException e)
         {
