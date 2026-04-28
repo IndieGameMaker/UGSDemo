@@ -84,6 +84,21 @@ public class AuthManager : MonoBehaviour
             }
         });
     }
+
+    private void OnEnable()
+    {
+        // 로그인 이벤트 연결
+        _signInUsernameButton.onClick.AddListener(async () => await SignIn(_userNameIf.text, _passwordIf.text));
+    }
+
+    private void OnDisable()
+    {
+        _signInButton.onClick.RemoveAllListeners();
+        _signOutButton.onClick.RemoveAllListeners();
+        _playerNameSaveButton.onClick.RemoveAllListeners();
+        _signUpButton.onClick.RemoveAllListeners();
+        _signInUsernameButton.onClick.RemoveAllListeners();
+    }
     
     // 인증 이벤트 연결
     private void EventBinding()
